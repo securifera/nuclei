@@ -41,6 +41,13 @@ type Matcher struct {
 	//   - value: "\"cookie-matcher\""
 	Name string `yaml:"name,omitempty" json:"name,omitempty" jsonschema:"title=name of the matcher,description=Name of the matcher"`
 	// description: |
+	//   CPE is the CPE (Common Platform Enumeration) string for the technology
+	//   detected by this matcher. When set, it will be emitted as ``matcher-cpe``
+	//   in JSON output so consumers can correlate detections with CVE databases.
+	// examples:
+	//   - value: ""cpe:2.3:a:wordpress:wordpress:*:*:*:*:*:*:*:*""
+	CPE string `yaml:"cpe,omitempty" json:"cpe,omitempty" jsonschema:"title=cpe of the matcher,description=CPE for the technology detected by this matcher"`
+	// description: |
 	//   Status are the acceptable status codes for the response.
 	// examples:
 	//   - value: >

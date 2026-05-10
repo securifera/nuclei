@@ -169,6 +169,8 @@ type ResultEvent struct {
 	Info model.Info `json:"info,inline"`
 	// MatcherName is the name of the matcher matched if any.
 	MatcherName string `json:"matcher-name,omitempty"`
+	// MatcherCPE is the CPE string from the fired matcher, if one was set.
+	MatcherCPE string `json:"matcher-cpe,omitempty"`
 	// ExtractorName is the name of the extractor matched if any.
 	ExtractorName string `json:"extractor-name,omitempty"`
 	// Type is the type of the result event.

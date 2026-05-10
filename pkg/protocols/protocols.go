@@ -370,6 +370,9 @@ func MakeDefaultResultEvent(request Request, wrapped *output.InternalWrappedEven
 		for matcherNames := range wrapped.OperatorsResult.Matches {
 			data := request.MakeResultEventItem(wrapped)
 			data.MatcherName = matcherNames
+			if cpe, ok := wrapped.OperatorsResult.MatcherCPEs[matcherNames]; ok {
+				data.MatcherCPE = cpe
+			}
 			results = append(results, data)
 		}
 	} else if len(wrapped.OperatorsResult.Extracts) > 0 {

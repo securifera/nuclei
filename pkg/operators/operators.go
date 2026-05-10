@@ -94,6 +94,8 @@ type Result struct {
 	Extracted bool
 	// Matches is a map of matcher names that we matched
 	Matches map[string][]string
+	// MatcherCPEs is a map of matcher names to their CPE strings
+	MatcherCPEs map[string]string
 	// Extracts contains all the data extracted from inputs
 	Extracts map[string][]string
 	// OutputExtracts is the list of extracts to be displayed on screen.
@@ -235,6 +237,7 @@ func (operators *Operators) Execute(data map[string]interface{}, match MatchFunc
 	var matches bool
 	result := &Result{
 		Matches:       make(map[string][]string),
+		MatcherCPEs:   make(map[string]string),
 		Extracts:      make(map[string][]string),
 		DynamicValues: make(map[string][]string),
 		outputUnique:  make(map[string]struct{}),
@@ -307,6 +310,9 @@ func (operators *Operators) Execute(data map[string]interface{}, match MatchFunc
 			} else { // if it's a "named" matcher with OR condition, then display it
 				if matcherCondition == matchers.ORCondition && matcher.Name != "" {
 					result.Matches[matcher.Name] = matched
+					if matcher.CPE != "" {
+						result.MatcherCPEs[matcher.Name] = matcher.CPE
+					}
 				}
 			}
 			matches = true
